@@ -1,11 +1,10 @@
 class Event < ApplicationRecord
-  has_many :attendances
+  has_many :attendances, foreign_key: 'attended_event_id'
   has_many :users, through: :attendances
   belongs_to :admin, class_name: 'User'
 
   validates :start_date,
-    presence: true,
-    numericality: { greater_than_or_equal_to: Time.now.to_i }
+    presence: true
 
   validates :duration,
       presence: true,
