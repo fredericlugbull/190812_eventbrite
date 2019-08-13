@@ -5,11 +5,11 @@ class Event < ApplicationRecord
 
   validates :start_date,
     presence: true,
-    if: :already_past
+    numericality: { greater_than_or_equal_to: Time.now.to_i }
 
   validates :duration,
       presence: true,
-      numericality: { greater_than: 0, only_integer: true}
+      numericality: { greater_than: 0, only_integer: true }
 
   validates :title,
       presence: true,
@@ -21,19 +21,10 @@ class Event < ApplicationRecord
 
   validates :price,
       presence: true,
-      length: { in: 1..1000}
+      length: { in: 1..1000 }
 
   validates :location,
       presence: true
 
-  def five_multiple?
-    duration % 5 == 0 ? true : errors.add(:duration, "must be a five multiple")
-  end
-
-  def already_past
-    if start_date.to_date < DateTime.now
-      errors.add{"Event already past"}
-    end 
-  end
 
 end
