@@ -21,7 +21,6 @@ end
 	e = Event.create(start_date: Faker::Time.forward(days: 23), duration: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60].sample, title: Faker::Book.title, description: Faker::Lorem.words, price: rand(1..1000), location: Faker::Address.city, admin: User.all.sample)
 end
 
-
 50.times do
   a = Attendance.create(user: User.all.sample, event: Event.all.sample)
 end
